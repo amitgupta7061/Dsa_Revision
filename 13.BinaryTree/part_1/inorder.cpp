@@ -23,6 +23,20 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<TreeNode*>st;
+        st.push(root);
+
+        while(st.size()){
+            
+
+        }
+    }
+};
+
 int main() {
 
     return 0;

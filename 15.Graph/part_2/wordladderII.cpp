@@ -8,13 +8,13 @@ public:
         queue<vector<string>> q;
         q.push({str});
         if (list.count(str)) list.erase(str);
-        unordered_set<string> usedThisLevel; // 🔹 store words used in current BFS level
+
+        vector<string> usedThisLevel;
 
         while (!q.empty()) {
-            int sz = q.size();
-            usedThisLevel.clear(); // 🔹 reset for this level
+            usedThisLevel.clear();
 
-            for (int i = 0; i < sz; i++) {
+            for (int i = q.size(); i > 0; i--) {
                 vector<string> ladder = q.front(); q.pop();
                 string currstr = ladder.back();
 
@@ -32,11 +32,14 @@ public:
                             vector<string> newLadder = ladder;
                             newLadder.push_back(currstr);
                             q.push(newLadder);
-                            usedThisLevel.insert(currstr);
+                            usedThisLevel.push_back(currstr); 
                         }
                     }
                     currstr[j] = originalchar;
                 }
+            }
+            for (const string &word : usedThisLevel) {
+                list.erase(word);
             }
         }
 
@@ -48,6 +51,7 @@ public:
         return f(beginWord, endWord, list);
     }
 };
+
 
 
 int main() {
